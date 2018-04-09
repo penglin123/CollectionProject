@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowAnimationStyle">@style/activityAnimationStyle</item>
     </style>
 
+    <style name="activityAnimationStyle">
+        <item name="android:activityOpenEnterAnimation">@anim/tran_next_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/tran_next_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/tran_pre_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/tran_pre_exit</item>
+    </style>
 </resources>
