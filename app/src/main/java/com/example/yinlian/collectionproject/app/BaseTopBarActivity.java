@@ -6,10 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.yinlian.collectionproject.R;
-
-import butterknife.ButterKnife;
 
 
 /**
@@ -19,14 +18,16 @@ import butterknife.ButterKnife;
 public abstract class BaseTopBarActivity  extends AppCompatActivity {
 
     Toolbar toolbar;
+    TextView title;
     FrameLayout viewContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_top_bar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        viewContent = (FrameLayout) findViewById(R.id.viewContent);
+        toolbar = findViewById(R.id.toolbar);
+        title = findViewById(R.id.title);
+        viewContent = findViewById(R.id.viewContent);
 
         //初始化设置ToolBar，必须放在toolbar事件之前
         setSupportActionBar(toolbar);
@@ -40,14 +41,13 @@ public abstract class BaseTopBarActivity  extends AppCompatActivity {
         });
         //将继承 TopBarBaseActivity 的布局解析到 FrameLayout里面
         LayoutInflater.from(this).inflate(getLayoutId(), viewContent);
-        ButterKnife.bind(this);
 
         init();
     }
 
     //设置标题
     protected void setTopBarText(String text) {
-        toolbar.setTitle(text);
+        title.setText(text);
     }
 
     //设置标题颜色

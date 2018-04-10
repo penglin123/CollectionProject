@@ -1,7 +1,9 @@
-package com.example.yinlian.collectionproject;
+package com.example.yinlian.collectionproject.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.yinlian.collectionproject.R;
 
 public class Main2Activity extends AppCompatActivity {
 

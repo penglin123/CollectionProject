@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.xwu.collectionproject"
+        applicationId "com.example.yinlian.collectionproject"
         minSdkVersion 20
         targetSdkVersion 26
         versionCode 1
@@ -35,8 +35,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
-    compile 'com.jakewharton:butterknife:8.5.1' //组件视图绑定依赖
-    compile 'com.jakewharton:butterknife-compiler:8.5.1'//组件视图绑定依赖
     compile 'com.android.support:design:26.1.0' //design依赖
 
 }

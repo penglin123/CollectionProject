@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.yinlian.collectionproject.R;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -19,22 +18,35 @@ import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
 /**
- * Created by DeMon on 2017/9/6.
+ * @author DeMon
+ * @date 2017/9/6
  */
 
-public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener {
+public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancelListener {
     private static final String TAG = "ProgressObserver";
-    private ObserverOnNextListener listener;
+    //    private ObserverOnNextListener listener;
     private ProgressDialogHandler mProgressDialogHandler;
     private Context context;
     private Disposable d;
 
-    public ProgressObserver(Context context, ObserverOnNextListener listener) {
-        this.listener = listener;
+
+    public abstract void onSuccess(Object o);
+
+    public abstract void onFailure(Throwable msg);
+
+    public abstract void onCompleted();
+
+//    public ProgressObserver(Context context, ObserverOnNextListener listener) {
+//        this.listener = listener;
+//        this.context = context;
+//        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
+//    }
+
+    public ProgressObserver(Context context) {
+
         this.context = context;
         mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
     }
-
 
     private void showProgressDialog() {
         if (mProgressDialogHandler != null) {
@@ -55,11 +67,12 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
         this.d = d;
         Log.d(TAG, "onSubscribe: ");
         showProgressDialog();
+
     }
 
     @Override
     public void onNext(T t) {
-        listener.onNext(t);
+        onSuccess(t);
     }
 
     @Override
@@ -83,11 +96,14 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
             onException(ExceptionReason.UNKNOWN_ERROR);
         }
         Log.e(TAG, "onError: ", e);
+        onFailure(e);
+        onComplete();
     }
 
     @Override
     public void onComplete() {
         dismissProgressDialog();
+        onCompleted();
         Log.d(TAG, "onComplete: ");
     }
 
@@ -107,23 +123,29 @@ public class ProgressObserver<T> implements Observer<T>, ProgressCancelListener 
     public void onException(ExceptionReason reason) {
         switch (reason) {
             case CONNECT_ERROR:
+                Toast.makeText(context, "11111", Toast.LENGTH_SHORT).show();
                 //   ToastUtils.show(R.string.connect_error, Toast.LENGTH_SHORT);
+
                 break;
 
             case CONNECT_TIMEOUT:
+                Toast.makeText(context, "22222", Toast.LENGTH_SHORT).show();
                 //    ToastUtils.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
                 break;
 
             case BAD_NETWORK:
+                Toast.makeText(context, "33333", Toast.LENGTH_SHORT).show();
                 // ToastUtils.show(R.string.bad_network, Toast.LENGTH_SHORT);
                 break;
 
             case PARSE_ERROR:
+                Toast.makeText(context, "44444", Toast.LENGTH_SHORT).show();
                 //  ToastUtils.show(R.string.parse_error, Toast.LENGTH_SHORT);
                 break;
 
             case UNKNOWN_ERROR:
             default:
+                Toast.makeText(context, "55555", Toast.LENGTH_SHORT).show();
                 //  ToastUtils.show(R.string.unknown_error, Toast.LENGTH_SHORT);
                 break;
         }

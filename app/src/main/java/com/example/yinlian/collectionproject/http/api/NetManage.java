@@ -6,7 +6,7 @@ package com.example.yinlian.collectionproject.http.api;
 
 public class NetManage {
 
-    private String baseUrl = "http://gc.ditu.aliyun.com/";//阿里云根据地区名获取经纬度接口
+    private String baseUrl = "http://api.zhuishushenqi.com";
 
     private volatile static ApiService apiService;
 
@@ -21,8 +21,10 @@ public class NetManage {
         return apiService;
     }
 
+
     private NetManage() {
-        ApiHelper baseApi = new ApiHelper();
-        apiService = baseApi.getRetrofit(baseUrl).create(ApiService.class);
+        ApiHelper apiHelper = new ApiHelper();
+        apiService = apiHelper.getSimpleRetrofit(baseUrl).create(ApiService.class);
     }
+
 }
