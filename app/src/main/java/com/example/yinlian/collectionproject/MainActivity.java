@@ -1,30 +1,56 @@
 package com.example.yinlian.collectionproject;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+import com.example.yinlian.collectionproject.app.BaseActivity;
+import com.example.yinlian.collectionproject.http.api.NetManage;
+import com.example.yinlian.collectionproject.http.progress.ObserverOnNextListener;
+import com.example.yinlian.collectionproject.http.progress.ProgressObserver;
 
-public class MainActivity extends AppCompatActivity {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-    private TextView text;
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
+    public int getLayoutId() {
+        return 0;
     }
 
-    private void initView() {
-        text = (TextView) findViewById(R.id.text);
-        text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Main2Activity.class));
-            }
-        });
+    @Override
+    public void init() {
 
+
+        NetManage.getApiService().getLocation("aaa")
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ProgressObserver<String>(this, new ObserverOnNextListener() {
+                    @Override
+                    public void onNext(Object o) {
+
+                    }
+                }));
+//        .subscribe(new Observer<String>() {
+//            @Override
+//            public void onSubscribe(Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(String s) {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//
+//            }
+//        });
     }
+
+
 }

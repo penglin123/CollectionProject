@@ -17,4 +17,8 @@
         <item name="android:activityCloseEnterAnimation">@anim/tran_pre_enter</item>
         <item name="android:activityCloseExitAnimation">@anim/tran_pre_exit</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 </resources>
