@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.yinlian.collectionproject.R;
+import com.r0adkll.slidr.Slidr;
 
 
 /**
@@ -26,6 +27,7 @@ public abstract class BaseTopBarActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_top_bar);
+        Slidr.attach(this);
         toolbar = findViewById(R.id.toolbar);
         title = findViewById(R.id.title);
         viewContent = findViewById(R.id.viewContent);

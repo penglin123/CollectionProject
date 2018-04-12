@@ -51,4 +51,6 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.0.0'
     //常用工具类
     compile 'com.blankj:utilcode:1.13.10'
+
+    compile 'com.r0adkll:slidableactivity:2.0.6'
 }
