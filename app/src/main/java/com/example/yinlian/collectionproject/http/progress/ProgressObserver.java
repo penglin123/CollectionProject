@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.google.gson.JsonParseException;
 
 import org.json.JSONException;
@@ -18,13 +19,12 @@ import io.reactivex.disposables.Disposable;
 import retrofit2.HttpException;
 
 /**
- * @author DeMon
- * @date 2017/9/6
+ * @author penglin
+ * @date 2018/4/10
  */
 
 public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancelListener {
     private static final String TAG = "ProgressObserver";
-    //    private ObserverOnNextListener listener;
     private ProgressDialogHandler mProgressDialogHandler;
     private Context context;
     private Disposable d;
@@ -36,13 +36,8 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
 
     public abstract void onCompleted();
 
-//    public ProgressObserver(Context context, ObserverOnNextListener listener) {
-//        this.listener = listener;
-//        this.context = context;
-//        mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
-//    }
 
-    public ProgressObserver(Context context) {
+    protected ProgressObserver(Context context) {
 
         this.context = context;
         mProgressDialogHandler = new ProgressDialogHandler(context, this, true);
@@ -65,7 +60,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     @Override
     public void onSubscribe(Disposable d) {
         this.d = d;
-        Log.d(TAG, "onSubscribe: ");
+        LogUtils.d(TAG, "onSubscribe: ");
         showProgressDialog();
 
     }
@@ -77,7 +72,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
 
     @Override
     public void onError(Throwable e) {
-        dismissProgressDialog();
+
         if (e instanceof HttpException) {     //   HTTP错误
             onException(ExceptionReason.BAD_NETWORK);
 
@@ -95,7 +90,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
         } else {
             onException(ExceptionReason.UNKNOWN_ERROR);
         }
-        Log.e(TAG, "onError: ", e);
+        LogUtils.e(TAG, "onError: ", e);
         onFailure(e);
         onComplete();
     }
@@ -104,7 +99,7 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
     public void onComplete() {
         dismissProgressDialog();
         onCompleted();
-        Log.d(TAG, "onComplete: ");
+        LogUtils.d(TAG, "onComplete: ");
     }
 
     @Override
@@ -120,32 +115,32 @@ public abstract class ProgressObserver<T> implements Observer<T>, ProgressCancel
      *
      * @param reason
      */
-    public void onException(ExceptionReason reason) {
+    private void onException(ExceptionReason reason) {
         switch (reason) {
             case CONNECT_ERROR:
-                Toast.makeText(context, "11111", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "connect_error", Toast.LENGTH_SHORT).show();
                 //   ToastUtils.show(R.string.connect_error, Toast.LENGTH_SHORT);
 
                 break;
 
             case CONNECT_TIMEOUT:
-                Toast.makeText(context, "22222", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "connect_timeout", Toast.LENGTH_SHORT).show();
                 //    ToastUtils.show(R.string.connect_timeout, Toast.LENGTH_SHORT);
                 break;
 
             case BAD_NETWORK:
-                Toast.makeText(context, "33333", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "bad_network", Toast.LENGTH_SHORT).show();
                 // ToastUtils.show(R.string.bad_network, Toast.LENGTH_SHORT);
                 break;
 
             case PARSE_ERROR:
-                Toast.makeText(context, "44444", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "parse_error", Toast.LENGTH_SHORT).show();
                 //  ToastUtils.show(R.string.parse_error, Toast.LENGTH_SHORT);
                 break;
 
             case UNKNOWN_ERROR:
             default:
-                Toast.makeText(context, "55555", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "unknown_error", Toast.LENGTH_SHORT).show();
                 //  ToastUtils.show(R.string.unknown_error, Toast.LENGTH_SHORT);
                 break;
         }

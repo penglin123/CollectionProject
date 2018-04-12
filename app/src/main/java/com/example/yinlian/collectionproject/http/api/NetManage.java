@@ -1,8 +1,12 @@
 package com.example.yinlian.collectionproject.http.api;
 
+import android.util.Log;
+
 /**
- * Created by xwu on 2018/4/10.
+ * @author penglin
+ * @date 2018/4/10
  */
+
 
 public class NetManage {
 
@@ -21,10 +25,9 @@ public class NetManage {
         return apiService;
     }
 
-
     private NetManage() {
         ApiHelper apiHelper = new ApiHelper();
-        apiService = apiHelper.getSimpleRetrofit(baseUrl).create(ApiService.class);
+        apiService = apiHelper.getRetrofit(baseUrl).create(ApiService.class);
     }
 
 }

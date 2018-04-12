@@ -2,7 +2,8 @@ package com.example.yinlian.collectionproject.http.progress;
 
 
 /**
- * Created by DeMon on 2017/9/6.
+ * @author penglin
+ * @date 2018/4/10
  */
 
 public interface ProgressCancelListener {

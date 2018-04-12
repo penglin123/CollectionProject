@@ -14,6 +14,7 @@ import com.example.yinlian.collectionproject.R;
 /**
  * 封装的带TopBar的Activity
  * 减少在xml中的include
+ *
  */
 public abstract class BaseTopBarActivity  extends AppCompatActivity {
 

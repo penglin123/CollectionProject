@@ -3,9 +3,9 @@ package com.example.yinlian.collectionproject.http.bean;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/11/9.
+ * @author penglin
+ * @date 2018/4/10
  */
-
 public class BooksByCatsBean {
 
     /**

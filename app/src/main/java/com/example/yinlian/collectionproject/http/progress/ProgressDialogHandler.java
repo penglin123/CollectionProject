@@ -8,14 +8,14 @@ import android.os.Message;
 
 
 /**
- * Created by DeMon on 2017/9/6.
+ * @author penglin
+ * @date 2018/4/10
  */
-
 public class ProgressDialogHandler extends Handler {
     public static final int SHOW_PROGRESS_DIALOG = 1;
     public static final int DISMISS_PROGRESS_DIALOG = 2;
 
-    private ProgressDialog pd;
+    private ProgressDialog progressDialog;
 
     private Context context;
     private boolean cancelable;
@@ -30,13 +30,13 @@ public class ProgressDialogHandler extends Handler {
     }
 
     private void initProgressDialog() {
-        if (pd == null) {
-            pd = new ProgressDialog(context);
-            pd.setMessage("加载中...");
-            pd.setCancelable(cancelable);
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setMessage("加载中...");
+            progressDialog.setCancelable(cancelable);
 
             if (cancelable) {
-                pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
                         mProgressCancelListener.onCancelProgress();
@@ -44,16 +44,16 @@ public class ProgressDialogHandler extends Handler {
                 });
             }
 
-            if (!pd.isShowing()) {
-                pd.show();
+            if (!progressDialog.isShowing()) {
+                progressDialog.show();
             }
         }
     }
 
     private void dismissProgressDialog() {
-        if (pd != null) {
-            pd.dismiss();
-            pd = null;
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
         }
     }
 
