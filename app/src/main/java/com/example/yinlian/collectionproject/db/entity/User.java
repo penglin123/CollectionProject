@@ -13,6 +13,7 @@ public class User {
     @Id
     private Long id;
     private String name;
+    private int age;
     @Transient
     private int tempUsageCount; // not persisted
     public String getName() {
@@ -27,10 +28,17 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    @Generated(hash = 873297011)
-    public User(Long id, String name) {
+    public int getAge() {
+        return this.age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    @Generated(hash = 1309193360)
+    public User(Long id, String name, int age) {
         this.id = id;
         this.name = name;
+        this.age = age;
     }
     @Generated(hash = 586692638)
     public User() {

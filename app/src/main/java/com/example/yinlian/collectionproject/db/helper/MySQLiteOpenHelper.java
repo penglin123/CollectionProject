@@ -9,11 +9,11 @@ import com.example.yinlian.collectionproject.db.gen.UserDao;
 import org.greenrobot.greendao.database.Database;
 
 /**
- * Created by xwu on 2018/4/12.
+ * Created by penglin on 2018/4/12.
  */
 
 public class MySQLiteOpenHelper extends DaoMaster.OpenHelper {
-    public MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
+    MySQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory);
     }
     @Override

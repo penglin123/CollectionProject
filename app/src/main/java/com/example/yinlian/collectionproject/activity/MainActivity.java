@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.example.yinlian.collectionproject.R;
 import com.example.yinlian.collectionproject.app.BaseTopBarActivity;
+import com.example.yinlian.collectionproject.db.helper.DbUtil;
+import com.example.yinlian.collectionproject.db.helper.UserHelper;
 import com.example.yinlian.collectionproject.http.api.NetManage;
 import com.example.yinlian.collectionproject.http.bean.BooksByCatsBean;
 import com.example.yinlian.collectionproject.http.progress.ProgressObserver;
@@ -32,6 +34,7 @@ public class MainActivity extends BaseTopBarActivity {
     @Override
     public void init() {
 
+        UserHelper userHelper = DbUtil.getUserHelper();
 
         text = findViewById(R.id.text);
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {

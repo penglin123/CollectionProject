@@ -20,8 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- *
- * please call {@link #migrate(SQLiteDatabase, Class[])} or {@link #migrate(Database, Class[])}
+ *数据库升级
+ *  * please call {@link #migrate(SQLiteDatabase, Class[])} or {@link #migrate(Database, Class[])}
  *
  */
 public final class MigrationHelper {

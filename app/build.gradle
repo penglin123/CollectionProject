@@ -20,7 +20,7 @@ android {
 apply plugin: 'org.greenrobot.greendao'
 
 greendao {
-    schemaVersion 1 //版本
+    schemaVersion 2 //版本
     daoPackage 'com.example.yinlian.collectionproject.db.gen'//生成文件包名
     targetGenDir 'src/main/java'//生成文件路径
 }
@@ -46,9 +46,13 @@ dependencies {
     //内存泄露检测工具
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
-    //数据库
+    //greendao数据库
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'org.greenrobot:greendao-generator:3.0.0'
+
+    //glide图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
     //常用工具类
     compile 'com.blankj:utilcode:1.13.10'
 
