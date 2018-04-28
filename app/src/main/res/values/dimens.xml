@@ -1,0 +1,46 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <!-- ************************* 通用 ******************** -->
+    <dimen name="margin_litter">2dp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_normal">12dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+    <dimen name="line_litter_height">0.5dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="text_size_10">10dp</dimen>
+    <dimen name="text_size_12">12dp</dimen>
+    <dimen name="text_size_14">14dp</dimen>
+    <dimen name="text_size_16">16dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="text_size_25">25dp</dimen>
+
+    <!-- item 大小 -->
+    <dimen name="item_height_30">30dp</dimen>
+    <dimen name="item_height_40">40dp</dimen>
+    <dimen name="item_height_50">50dp</dimen>
+    <dimen name="item_height_65">65dp</dimen>
+    <dimen name="item_height_100">100dp</dimen>
+    <dimen name="item_height_120">120dp</dimen>
+
+    <!--image的宽和高-->
+    <dimen name="image_height_15">15dp</dimen>
+    <dimen name="image_height_20">20dp</dimen>
+    <dimen name="image_height_30">30dp</dimen>
+    <dimen name="image_height_50">50dp</dimen>
+    <dimen name="image_height_100">100dp</dimen>
+    <!-- ************************* 结束 ******************** -->
+
+    <!-- TitleBar height -->
+    <dimen name="title_bar_height">48dp</dimen>
+    <dimen name="title_bar_weight">60dp</dimen>
+
+</resources>

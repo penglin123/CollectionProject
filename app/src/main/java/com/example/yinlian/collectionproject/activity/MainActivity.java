@@ -1,30 +1,43 @@
 package com.example.yinlian.collectionproject.activity;
 
-import android.content.Intent;
-import android.view.View;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
+import com.example.library.base.BaseActivity;
+import com.example.library.util.ToastUtils;
 import com.example.yinlian.collectionproject.R;
-import com.example.yinlian.collectionproject.app.BaseTopBarActivity;
-import com.example.yinlian.collectionproject.db.helper.DbUtil;
-import com.example.yinlian.collectionproject.db.helper.UserHelper;
-import com.example.yinlian.collectionproject.http.api.NetManage;
-import com.example.yinlian.collectionproject.http.bean.BooksByCatsBean;
-import com.example.yinlian.collectionproject.http.progress.ProgressObserver;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
+public class MainActivity extends BaseActivity {
 
-/**
- * @author penglin
- * @date 2018/4/10
- */
+    private TextView mTextMessage;
 
-public class MainActivity extends BaseTopBarActivity {
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_notifications:
+                    mTextMessage.setText(R.string.title_notifications);
+                    return true;
+            }
+            return false;
+        }
+    };
+    private long mExitTime=0;
 
-    private TextView text;
 
     @Override
     public int getLayoutId() {
@@ -34,53 +47,35 @@ public class MainActivity extends BaseTopBarActivity {
     @Override
     public void init() {
 
-        UserHelper userHelper = DbUtil.getUserHelper();
-
-        text = findViewById(R.id.text);
-        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                NetManage.getApiService().getBooksByCats("male", "hot",
-                        "玄幻", "东方玄幻", 0, 20)
-                        .subscribeOn(Schedulers.io())
-                        .unsubscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new ProgressObserver<BooksByCatsBean>(MainActivity.this) {
-                            @Override
-                            public void onSuccess(Object o) {
-                                if (o instanceof BooksByCatsBean) {
-                                    text.setText(o.toString());
-                                    BooksByCatsBean booksByCatsBean= (BooksByCatsBean) o;
-                                    LogUtils.json(booksByCatsBean.books.toString());
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onFailure(Throwable msg) {
-
-                            }
-
-                            @Override
-                            public void onCompleted() {
-
-                            }
-                        });
-
-            }
-        });
-
-
-        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, Main2Activity.class));
-            }
-        });
+        mTextMessage = findViewById(R.id.message);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            //两秒之内按返回键就会退出
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+               ToastUtils.showShort(getString(R.string.app_exit_hint));
+                mExitTime = System.currentTimeMillis();
+            } else {
+                try {
+//                    finishAllActivity();
+                    //杀死后台进程需要在AndroidManifest中声明android.permission.KILL_BACKGROUND_PROCESSES；
+                   ActivityManager activityManager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
+                    assert activityManager != null;
+                    activityManager.killBackgroundProcesses(this.getPackageName());
+                    //System.exit(0);
+                    finish();
+                } catch (Exception e) {
+                    Log.e("ActivityManager", "app exit" + e.getMessage());
+                }
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

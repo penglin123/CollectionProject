@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Library</string>
+    <string name="loading">加载中…</string>
+    <string name="page_inexistence">404，页面不存在</string>
+    <string name="connect_error">网络连接错误</string>
+    <string name="parse_error">解析错误</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="connect_timeout">网络连接超时</string>
+</resources>
