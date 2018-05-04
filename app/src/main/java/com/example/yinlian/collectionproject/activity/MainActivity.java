@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.library.base.BaseActivity;
-import com.example.library.util.ToastUtils;
+import com.example.library.utils.ToastUtils;
 import com.example.yinlian.collectionproject.R;
 
 public class MainActivity extends BaseActivity {

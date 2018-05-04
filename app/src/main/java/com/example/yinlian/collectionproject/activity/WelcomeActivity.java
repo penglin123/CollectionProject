@@ -13,10 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.example.library.utils.SPManager;
 import com.example.yinlian.collectionproject.R;
-import com.example.yinlian.collectionproject.testdemo.Main2Activity;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -56,14 +55,12 @@ public class WelcomeActivity extends AppCompatActivity {
                                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            //  shouldRequest.again(true);
                                             PermissionUtils.launchAppDetailsSettings();
                                         }
                                     })
                                     .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            // shouldRequest.again(false);
                                             finish();
 
                                         }
@@ -73,7 +70,6 @@ public class WelcomeActivity extends AppCompatActivity {
                                     .show();
 
                         } else {
-                            //  Toast.makeText(WelcomeActivity.this, "必须同意所有权限才能使用本程序", Toast.LENGTH_LONG).show();
                             mHandler.sendEmptyMessageDelayed(0, 1000);
                         }
 
@@ -98,10 +94,11 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void getHome() {
-        String token = SPUtils.getInstance().getString("token");
+        String token = SPManager.getToken();
         LogUtils.i(token);
         if (!StringUtils.isEmpty(token)) {
-            Intent intent = new Intent(WelcomeActivity.this, Main2Activity.class);
+
+            Intent intent = new Intent(WelcomeActivity.this, GestureLockActivity.class);
             startActivity(intent);
 
         } else {

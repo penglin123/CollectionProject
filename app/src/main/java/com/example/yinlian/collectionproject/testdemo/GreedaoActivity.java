@@ -13,7 +13,7 @@ import com.example.library.db.entity.User;
 import com.example.library.db.gen.UserDao;
 import com.example.library.db.helper.DbUtil;
 import com.example.library.db.helper.UserHelper;
-import com.example.library.util.GlideUtils;
+import com.example.library.utils.GlideUtils;
 import com.example.yinlian.collectionproject.R;
 
 import org.greenrobot.greendao.query.Query;

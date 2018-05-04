@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#cfff"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:text="请输入手势密码解锁"
+        android:textSize="18sp" />
+
+    <com.example.library.gesturelock.GestureLockViewGroup
+        android:id="@+id/gesturelock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        app:color_finger_on="#3aa6e8"
+        app:color_finger_up_correct="#3aa6e8"
+        app:color_finger_up_error="#ff0000"
+        app:color_no_finger="#AAAAAA"
+        app:count="3"
+        app:preference_id="1" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <Switch
+            android:id="@+id/gesture_trajectory_is_visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="手势轨迹"
+            android:textSize="@dimen/text_size_14" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_forget_gesture_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="忘记手势密码"
+            android:textColor="#3aa6e8"
+            android:textSize="@dimen/text_size_14" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

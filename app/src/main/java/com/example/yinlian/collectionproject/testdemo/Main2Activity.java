@@ -10,15 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.PermissionUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.example.library.base.BaseActivity;
 import com.example.library.base.BaseApplication;
 import com.example.library.http.api.NetManage;
 import com.example.library.http.bean.BooksByCatsResponse;
 import com.example.library.http.progress.BaseObserver;
+import com.example.library.utils.SPManager;
+import com.example.yinlian.collectionproject.R;
 import com.example.yinlian.collectionproject.activity.LoginActivity;
 import com.example.yinlian.collectionproject.activity.MainActivity;
-import com.example.yinlian.collectionproject.R;
 
 import java.util.List;
 
@@ -98,7 +98,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                         .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                SPUtils.getInstance().put("token", "");
+                                SPManager.putToken("");
                                 startActivity(new Intent(Main2Activity.this, LoginActivity.class));
 
                                 dialog.dismiss();

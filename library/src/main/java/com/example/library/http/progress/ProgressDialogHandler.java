@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 
-import com.example.library.view.LoadingDialog;
+import com.example.library.weight.LoadingDialog;
 
 
 /**

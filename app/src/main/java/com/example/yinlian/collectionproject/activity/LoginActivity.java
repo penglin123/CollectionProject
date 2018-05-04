@@ -11,18 +11,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.example.library.base.BaseActivity;
 import com.example.library.http.api.NetManage;
 import com.example.library.http.bean.LoginRequest;
 import com.example.library.http.bean.LoginResponse;
 import com.example.library.http.progress.BaseObserver;
-import com.example.library.util.NetStateMonitor;
-import com.example.library.util.ToastUtils;
+import com.example.library.utils.NetStateMonitor;
+import com.example.library.utils.SPManager;
+import com.example.library.utils.ToastUtils;
 import com.example.yinlian.collectionproject.R;
-import com.example.yinlian.collectionproject.testdemo.Main2Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -33,7 +31,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author penglin
  */
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, TextWatcher, View.OnFocusChangeListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     //view
     private EditText etName;
@@ -75,7 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         initTitle(getString(R.string.login));
         netStateMonitor = NetStateMonitor.getInstance();
 
-        String userName = SPUtils.getInstance().getString("userName");
+        String userName = SPManager.getUserName();
         if (!StringUtils.isEmpty(userName)) {
             etName.setText(userName);
             etName.setSelection(userName.length());
@@ -84,10 +82,49 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     private void initListener() {
-        etName.addTextChangedListener(this);
-        etName.setOnFocusChangeListener(this);
-        etPassword.addTextChangedListener(this);
+        etName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (StringUtils.isEmpty(etName.getText().toString())) {
+                    ivEmptyAccount.setVisibility(View.GONE);
+                } else {
+                    ivEmptyAccount.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        etPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if (StringUtils.isEmpty(etPassword.getText().toString())) {
+                    ivEmptyPsw.setVisibility(View.GONE);
+                } else {
+                    ivEmptyPsw.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         etPassword.setOnFocusChangeListener(this);
+        etName.setOnFocusChangeListener(this);
 
         btnLogin.setOnClickListener(this);
         ivSeePassword.setOnClickListener(this);
@@ -155,9 +192,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
     }
 
-    /**
-     * 设置密码可见和不可见的相互转换
-     */
+    // 设置密码可见和不可见的相互转换
     private void setPasswordVisibility() {
         if (ivSeePassword.isSelected()) {
             ivSeePassword.setSelected(false);
@@ -175,9 +210,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         }
     }
 
-    /**
-     * 登录
-     */
+    //登录
     private void login() {
         final String etNameText = etName.getText().toString().trim();
         String etPasswordText = etPassword.getText().toString().trim();
@@ -200,20 +233,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 .subscribe(new BaseObserver<LoginResponse>(this) {
                     @Override
                     protected void onSuccess(LoginResponse value) {
-
-                        SPUtils.getInstance().put("token", "123456");
-                        SPUtils.getInstance().put("userName", etNameText);
-
+                        SPManager.putToken("123456");
+                        SPManager.putUserName(etNameText);
+                        // TODO: 2018/5/2
+                        //数据库操作
                         ToastUtils.showShort(R.string.login_successful);
-                        startActivity(new Intent(LoginActivity.this, Main2Activity.class));
+                        startActivity(new Intent(LoginActivity.this, GestureLockActivity.class));
                         finish();
                     }
 
                     @Override
                     protected void onFailure(String errorType, String msg) {
-                        ToastUtils.showShort(R.string.login_failure);
-                        startActivity(new Intent(LoginActivity.this, Main2Activity.class));
-                        finish();
+                        onSuccess(null);
+//                        ToastUtils.showShort(R.string.login_failure);
                     }
 
                     @Override
@@ -221,42 +253,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
                     }
                 });
-    }
-
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-
-
-
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        LogUtils.i("etName.isFocusable():"+etName.isFocusable(),
-                "etPassword.isFocusable():"+etPassword.isFocusable(),
-                " etName.isActivated():"+ etName.isActivated()
-                , " etPassword.isActivated():"+ etPassword.isActivated());
-
-        if (etName.isFocusable()) {
-            if (StringUtils.isEmpty(etName.getText().toString())) {
-                ivEmptyAccount.setVisibility(View.GONE);
-            } else {
-                ivEmptyAccount.setVisibility(View.VISIBLE);
-            }
-        } else if (etPassword.isFocusable()) {
-            if (StringUtils.isEmpty(etPassword.getText().toString())) {
-                ivEmptyPsw.setVisibility(View.GONE);
-            } else {
-                ivEmptyPsw.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
     }
 
     @Override
@@ -267,7 +263,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        LogUtils.i(v == etName);
+
         if (v == etName) {
             if (hasFocus) {
                 if (StringUtils.isEmpty(etName.getText().toString())) {

@@ -50,11 +50,11 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.example.library.util.BaiduMapUtil;
-import com.example.library.util.OverlayManager;
-import com.example.library.util.TransitRouteOverlay;
-import com.example.library.util.WalkingRouteOverlay;
+import com.example.library.baidumap.BaiduMapUtil;
+import com.example.library.baidumap.OverlayManager;
+import com.example.library.utils.ToastUtils;
+import com.example.library.baidumap.TransitRouteOverlay;
+import com.example.library.baidumap.WalkingRouteOverlay;
 import com.example.yinlian.collectionproject.R;
 import com.google.gson.Gson;
 
@@ -262,7 +262,7 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
             mCurrentAccracy = location.getRadius();
-            LogUtils.i(new Gson().toJson(location.getAddress()),location.getLocType());
+            LogUtils.i(new Gson().toJson(location.getAddress()), location.getLocType());
 
             startll = new LatLng(mCurrentLat, mCurrentLon);
 
@@ -316,7 +316,9 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
                 LogUtils.i("纬度：" + result.getLocation().latitude,
                         " 经度：" + result.getLocation().longitude);
 
+                //签到（计算两点距离）
                 double distance = DistanceUtil.getDistance(startll, endll);
+
                 LogUtils.i(distance);
                 ToastUtils.showShort(distance + "米");
 
@@ -347,13 +349,14 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
     };
 
     /**
-     * 路线规划
+     * 路线规划搜索回调
      */
     OnGetRoutePlanResultListener onGetRoutePlanResultListener = new OnGetRoutePlanResultListener() {
 
+        //获取步行线路规划结果
         @Override
         public void onGetWalkingRouteResult(WalkingRouteResult result) {
-            //获取步行线路规划结果
+
             LogUtils.i(result.error);
             if (result.error != SearchResult.ERRORNO.NO_ERROR) {
                 ToastUtils.showShort("抱歉，未找到结果");
@@ -394,6 +397,7 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
             }
         }
 
+        //公交导航路线
         @Override
         public void onGetTransitRouteResult(final TransitRouteResult result) {
             //公交导航路线
@@ -465,22 +469,22 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
 
         @Override
         public void onGetMassTransitRouteResult(MassTransitRouteResult massTransitRouteResult) {
-            ToastUtils.showShort("3");
+
         }
 
         @Override
         public void onGetDrivingRouteResult(DrivingRouteResult drivingRouteResult) {
-            ToastUtils.showShort("4");
+
         }
 
         @Override
         public void onGetIndoorRouteResult(IndoorRouteResult indoorRouteResult) {
-            ToastUtils.showShort("5");
+
         }
 
         @Override
         public void onGetBikingRouteResult(BikingRouteResult bikingRouteResult) {
-            ToastUtils.showShort("6");
+
         }
 
     };
@@ -523,7 +527,7 @@ public class BaiduMapActivity extends AppCompatActivity implements SensorEventLi
 
     // 响应DLg中的List item 点击
     interface OnItemInDlgClickListener {
-         void onItemClick(int position);
+        void onItemClick(int position);
     }
 
     // 供路线选择的Dialog
