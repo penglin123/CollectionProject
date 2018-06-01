@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.example.library.base.BaseActivity;
 import com.example.library.db.entity.User;
 import com.example.library.db.gen.UserDao;
@@ -38,8 +37,7 @@ public class GreedaoActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void init() {
-        initTitle("22222");
-        initToolbar(R.drawable.ic_back, R.menu.menu_main);
+        initToolbar("数据库操作",R.drawable.ic_back, R.menu.menu_main);
         userHelper = DbUtil.getUserHelper();
         add = findViewById(R.id.add);
         updata = findViewById(R.id.updata);
@@ -106,12 +104,12 @@ public class GreedaoActivity extends BaseActivity implements View.OnClickListene
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_edit:
-                ToastUtils.showShort("click edit");
-                break;
-            case R.id.action_share:
-                ToastUtils.showShort("click share");
-                break;
+//            case R.id.action_edit:
+//                ToastUtils.showShort("click edit");
+//                break;
+//            case R.id.action_share:
+//                ToastUtils.showShort("click share");
+//                break;
             case R.id.action_overflow:
                 break;
             default:

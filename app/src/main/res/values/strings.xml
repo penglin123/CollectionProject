@@ -1,8 +1,41 @@
 <resources>
     <string name="app_name">CollectionProject</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="navigation_one">外访任务</string>
+    <string name="navigation_two">委外任务</string>
+    <string name="navigation_three">统计</string>
+    <string name="navigation_four">我的</string>
 
+    <string name="account">请输入登录的账号</string>
+    <string name="password">请输入登录密码</string>
+    <string name="check_password">记住密码</string>
+    <string name="check_login">自动登录</string>
+    <string name="login">登录</string>
+    <string name="prompt">提示</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="welcome">Welcome</string>
+    <string name="userName_or_password_isEmpty">用户名或密码为空</string>
+    <string name="login_successful">登录成功</string>
+    <string name="login_failure">登录失败</string>
+    <string name="check_the_network_setUpThe">当前无网络，请检查网络设置</string>
+    <string name="login_again">重新登录</string>
+
+    <string name="please_use_fingerprint_or_manual_password_unlock">请使用指纹或手势密码解锁</string>
+    <string name="please_use_manual_password_unlock">请输入手势密码解锁</string>
+    <string name="gesture_password">手势密码</string>
+    <string name="fingerprint_verification_success">指纹验证成功</string>
+    <string name="fingerprint_verification_failed">指纹验证失败</string>
+    <string name="gesture_unlock_close">您已连续五次输错手势，手势解锁关闭，请重新登录</string>
+    <string name="again_draw_the_password">再次绘制手势密码</string>
+    <string name="least_connect_4_points">最少连接4个点，请重新输入!</string>
+    <string name="gestures_password_successfully_set">手势密码设置成功</string>
+    <string name="repaint">与上一次绘制不一致，请重新绘制</string>
+    <string name="draw_the_password">绘制手势密码</string>
+    <string name="forget_gesture_code">忘记手势密码，需重新登录</string>
+    <string name="number_of_password_errors">密码错误，还可以输入%1$d次</string>
+    <string name="correct_gesture_password">手势密码正确</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

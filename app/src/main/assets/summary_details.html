@@ -1,0 +1,83 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+	<title>总结详情</title>
+
+		<link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.min.css" rel="stylesheet">
+	<script src="js/ionic.bundle.min.js"></script>
+
+	<script>
+			angular.module('ionicApp', ['ionic'])
+				.controller('ionicApp', function($scope) {
+
+				});
+		</script>
+	<style type="text/css">
+			.item {
+				color: #666666;
+			}
+		</style>
+</head>
+
+<body ng-app="ionicApp" ng-controller="ionicApp">
+<ion-content>
+	<div class="item item-divider">
+		<i class="icon ion-ios-paper-outline"></i> 沟通流程
+	</div>
+
+	<div class="item">
+		沟通对象<span class="item-note">家人</span>
+	</div>
+	<div class="item">
+		沟通结果<span class="item-note">良好</span>
+	</div>
+	<div class="item">
+		地址类型<span class="item-note">家庭地址</span>
+	</div>
+	<div class="item">
+		地址<span class="item-note">顾唐路1699</span>
+	</div>
+	<div class="item">
+		屋内装修情况<span class="item-note">豪华</span>
+	</div>
+
+	<div class="item item-divider">
+		<i class="icon ion-ios-email-outline"></i> 总结及建议
+	</div>
+
+	<label class="item item-input item-stacked-label">
+
+		<div>总结</div>
+		<textarea style="background: #FFFFFF;resize: none;" disabled="disabled" rows="4" warp="virtual" >nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1</textarea>
+	</label>
+
+	<label class="item item-input item-stacked-label">
+		<span >建议</span>
+		<textarea style="background: #FFFFFF;resize: none;"  disabled="disabled" rows="4" warp="virtual">nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1nishibushia1</textarea>
+	</label>
+
+	<div style="margin-bottom: 10px;" class="item item-divider">
+		<i class="icon ion-ios-photos-outline"></i> 照片
+	</div>
+	<img style="width: 30%;" src="http://ww1.sinaimg.cn/large/0065oQSqly1frjd77dt8zj30k80q2aga.jpg" />
+	<img style="width: 30%;" src="http://ww1.sinaimg.cn/large/0065oQSqly1frjd4var2bj30k80q0dlf.jpg" />
+	<img style="width: 30%;" src="http://ww1.sinaimg.cn/large/0065oQSqly1frja502w5xj30k80od410.jpg" />
+
+
+	<div style="margin-bottom: 10px;" class="item item-divider">
+		<i class="icon ion-ios-mic-outline"></i> 录音
+	</div>
+	<ion-list>
+		<!--<ion-item ng-repeat="item in items">-->
+		<button style="margin-left:10px; margin-bottom: 50px;background: #7990FF; color: #FFFFFF; border-radius: 5px; border: none; width: 100px;  line-height: 30px; " class=" icon-left ion-ios-volume-high ">&nbsp;&nbsp;36s</button>
+		<button style="margin-bottom: 50px;background: #7990FF; color: #FFFFFF; border-radius: 5px; border: none; width: 100px;  padding: 0;margin: 0;  line-height: 30px; height: 30px;" class=" icon-left ion-ios-volume-high ">&nbsp;&nbsp;1m36s</button>
+		<button style="margin-bottom: 50px;background: #7990FF; color: #FFFFFF; border-radius: 5px; border: none; width: 100px;  padding: 0;margin: 0;  line-height: 30px; height: 30px;" class=" icon-left ion-ios-volume-high ">&nbsp;&nbsp;2m59s</button>
+		<!--</ion-item>-->
+	</ion-list>
+</ion-content>
+
+</body>
+
+</html>

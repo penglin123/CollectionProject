@@ -21,17 +21,19 @@ import com.example.library.utils.NetStateMonitor;
 import com.example.library.utils.SPManager;
 import com.example.library.utils.ToastUtils;
 import com.example.yinlian.collectionproject.R;
+import com.example.yinlian.collectionproject.testdemo.Main2Activity;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-
 /**
- * @author penglin
+ - @Description:  登录页面
+ - @Author:  penglin
+ - @Time:
  */
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener, View.OnFocusChangeListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, View.OnFocusChangeListener, View.OnLongClickListener {
 
     //view
     private EditText etName;
@@ -127,11 +129,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         etName.setOnFocusChangeListener(this);
 
         btnLogin.setOnClickListener(this);
+        btnLogin.setOnLongClickListener(this);
         ivSeePassword.setOnClickListener(this);
         ivEmptyAccount.setOnClickListener(this);
         ivEmptyPsw.setOnClickListener(this);
-
         tvNetworkStatus.setOnClickListener(this);
+
+        netStateMonitor();
+
+    }
+
+    //网络监听
+    private void netStateMonitor() {
         netStateMonitor.observe(this)
                 .subscribe(new Observer<NetStateMonitor.NetState>() {
                     @Override
@@ -285,6 +294,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 ivEmptyPsw.setVisibility(View.GONE);
             }
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        startActivity(new Intent(this, Main2Activity.class));
+        return true;
     }
 }
 

@@ -16,6 +16,7 @@ import io.reactivex.subjects.PublishSubject;
 import io.reactivex.subjects.Subject;
 
 /**
+ * 网络动态监听
  * Created by penglin on 2018/4/13.
  */
 

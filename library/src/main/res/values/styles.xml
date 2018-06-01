@@ -33,4 +33,9 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowSoftInputMode">adjustPan</item>
     </style>
+
+    <style name="anim_popupw">
+        <item name="android:windowEnterAnimation">@anim/popupwshow</item>
+        <item name="android:windowExitAnimation">@anim/popupwhide</item>
+    </style>
 </resources>

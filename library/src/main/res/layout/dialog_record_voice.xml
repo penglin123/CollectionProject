@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:background="@drawable/shape_solid_oval_3aa6e8_8">
+        android:background="@drawable/shape_solid_oval_7990ff_8">
 
         <com.example.library.voiceutil.VoiceLineView
             android:id="@+id/voicLine"

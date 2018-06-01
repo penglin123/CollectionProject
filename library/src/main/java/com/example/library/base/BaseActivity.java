@@ -32,11 +32,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     AppBarLayout appbar;
     TextView title;
     FrameLayout viewContent;
+    public Context mContext;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = this;
         setContentView(R.layout.activity_base_activity);
         // Slidr.attach(this);
         rootLayout = findViewById(R.id.rootLayout);
@@ -70,8 +72,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         title.setText(stringId);
     }
 
-    public void initToolbar(@DrawableRes int navigationIconId) {
-
+    protected void initTitleAndToolbarBack(String toolbarTitle, int navigationIconId) {
+        initTitle(toolbarTitle);
         toolbar.setNavigationIcon(navigationIconId);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +83,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         });
     }
 
-    public void initToolbar(@DrawableRes int navigationIconId, @MenuRes int menuId) {
-        initToolbar(navigationIconId);
+
+    protected void initToolbar(String toolbarTitle, @DrawableRes int navigationIconId, @MenuRes int menuId) {
+        initTitleAndToolbarBack(toolbarTitle, navigationIconId);
         toolbar.inflateMenu(menuId);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -98,16 +101,16 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param item item
      * @return 是否消费
      */
-    public boolean onMenuItemClick(MenuItem item) {
+    protected boolean onMenuItemClick(MenuItem item) {
         return false;
     }
 
 
     //获取继承的布局
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     //初始化继承后onCreate()业务
-    public abstract void init();
+    protected abstract void init();
 
     @Override
     protected void onDestroy() {
@@ -115,6 +118,12 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * 键盘监听
+     *
+     * @param ev
+     * @return
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {

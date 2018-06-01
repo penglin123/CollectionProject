@@ -148,6 +148,43 @@ public class RecordVoiceButton extends AppCompatButton implements View.OnClickLi
         voiceManager.startVoiceRecord(Environment.getExternalStorageDirectory().getPath() + "/VoiceManager/audio");
     }
 
+    public void startRecord() {
+        startRecordDialog();
+        voiceManager.setVoiceRecordListener(new VoiceManager.VoiceRecordCallBack() {
+            @Override
+            public void recDoing(long time, String strTime) {
+                mRecordHintTv.setText(strTime);
+            }
+
+            @Override
+            public void recVoiceGrade(int grade) {
+                voicLine.setVolume(grade);
+            }
+
+            @Override
+            public void recStart(boolean init) {
+                mIvPauseContinue.setImageResource(R.drawable.icon_pause);
+                voicLine.setContinue();
+            }
+
+            @Override
+            public void recPause(String str) {
+                mIvPauseContinue.setImageResource(R.drawable.icon_continue);
+                voicLine.setPause();
+            }
+
+
+            @Override
+            public void recFinish(long length, String strLength, String path) {
+                if (enRecordVoiceListener != null) {
+                    enRecordVoiceListener.onFinishRecord(length, strLength, path);
+                }
+            }
+        });
+        voiceManager.startVoiceRecord(Environment.getExternalStorageDirectory().getPath() + "/VoiceManager/audio");
+
+    }
+
     /**
      * 结束回调监听
      */

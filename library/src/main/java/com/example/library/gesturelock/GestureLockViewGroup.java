@@ -450,6 +450,15 @@ public class GestureLockViewGroup extends RelativeLayout {
     //对外公开的一些方法
 
     public void setGestureEventListener(GestureEventListener gestureEventListener) {
+        isRetryTimeLimit = true;
+
+        if (SPManager.getRetryTimes() != -1) {
+            mTryTimes = SPManager.getRetryTimes();
+        } else {
+            mTryTimes = 5;
+            SPManager.putRetryTimes(mTryTimes);
+        }
+
         this.gestureEventListener = gestureEventListener;
     }
 

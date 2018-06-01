@@ -1,0 +1,253 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>任务详情</title>
+
+		<link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.min.css" rel="stylesheet">
+		<script src="js/ionic.bundle.min.js"></script>
+
+		<style type="text/css">
+			.item {
+				color: #666666;
+			}
+			
+			.col {
+				flex: initial;
+				width: 100px;
+			}
+			
+			img {
+				height: 100px;
+				width: 100px;
+			}
+			
+			button {
+				margin-bottom: 50px;
+				background: #7990FF;
+				color: #FFFFFF;
+				border-radius: 5px;
+				border: none;
+				width: 90px;
+				line-height: 26px;
+			}
+		</style>
+	</head>
+
+	<body ng-app="customerDetails" ng-controller="customerDetails">
+
+		<ion-content>
+			<div class="item item-divider">
+				<i class="icon ion-beaker"></i> 客户信息
+			</div>
+			<div class="item">
+				客户姓名<span class="item-note">张三</span>
+			</div>
+			<div class="item">
+				证件类型<span class="item-note">身份证</span>
+			</div>
+			<div class="item">
+				证件号<span class="item-note">432522199308084569</span>
+			</div>
+			<div class="item">
+				总欠款金额<span class="item-note">885522</span>
+			</div>
+			<div class="item">
+				逾期金额本币<span class="item-note">222</span>
+			</div>
+			<div class="item">
+				逾期金额外币<span class="item-note">0</span>
+			</div>
+			<div class="item">
+				逾期期数<span class="item-note">5</span>
+			</div>
+
+			<div class="item item-divider">
+				<i class="icon ion-beaker"></i> 账务信息
+			</div>
+			<div class="item">
+				总欠款金额<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				总金额<span class="item-note">23114</span>
+			</div>
+			<div class="item">
+				逾期金额<span class="item-note">16548</span>
+			</div>
+			<div class="item">
+				总额度<span class="item-note">9856</span>
+			</div>
+			<div class="item">
+				最低还款额本币<span class="item-note">156</span>
+			</div>
+			<div class="item">
+				最低还款额外币<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				当前余额本币<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				当前余额外币<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				逾期金额本币<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				逾期金额外币<span class="item-note">569498</span>
+			</div>
+			<div class="item">
+				账单金额本币<span class="item-note">569498</span>
+			</div>
+			<div class="item item-divider">
+				<i class="icon ion-beaker"></i> 联系信息
+			</div>
+			<div class="item">
+				关系<span class="item-note">母亲</span>
+			</div>
+			<div class="item">
+				身份证<span class="item-note">455286644862548523</span>
+			</div>
+			<div class="item">
+				手机号码<span><a class="item-note" href="tel:15570713639">134892134963</a> </span>
+			</div>
+			<div class="item">
+				单位名称<span class="item-note">上海嘎嘎公司</span>
+			</div>
+			<div class="item">
+				归属地<span class="item-note">上海</span>
+			</div>
+			<div class="item">
+				区号<span class="item-note">021</span>
+			</div>
+			<div class="item">
+				号码<span class="item-note">6286432</span>
+			</div>
+			<div class="item">
+				分机<span class="item-note">156</span>
+			</div>
+
+			<div class="item item-divider">
+				<i class="icon ion-beaker"></i> 备注信息
+			</div>
+			<div class="item">
+				主题<span class="item-note">客户父亲</span>
+			</div>
+			<div class="item">
+				客户姓名<span class="item-note">王五</span>
+			</div>
+			<div class="item">
+				关系<span class="item-note">家人</span>
+			</div>
+			<div class="item">
+				类型描述<span class="item-note">什么鬼</span>
+			</div>
+			<div class="item">
+				备注<span class="item-note">吖吖吖</span>
+			</div>
+			<div class="item item-divider">
+				<i class="icon ion-ios-photos-outline"></i> 照片外访记录
+			</div>
+
+			<div class="row  " id='addImg'>
+				<img class="col" ng-repeat="img in imglist" src={{img}} />
+			</div>
+
+			<div style="margin-bottom: 5px;" class="item item-divider">
+				<i class="icon ion-ios-mic-outline"></i> 录音外访记录
+			</div>
+
+			<div class="row " id='addRecord'>
+				<div class="col " ng-repeat="record in recordlist">
+					<button class=" icon-left ion-ios-volume-high " ng-click="recordPlay(record)">&nbsp;&nbsp;{{record.strLength}}</button>
+				</div>
+			</div>
+
+		</ion-content>
+
+		<script>
+			angular.module('customerDetails', ['ionic'])
+				.controller('customerDetails', ['$scope', '$http',
+					function($scope, $http) {
+						//假数据
+						$scope.imglist = [
+							"http://ww1.sinaimg.cn/large/0065oQSqly1frjd77dt8zj30k80q2aga.jpg"
+						];
+
+						$scope.recordlist = [{
+							"filePath": "/storage/sdcard/VoiceManager/audio/20180528-071126.amr",
+							"length": 7,
+							"strLength": "00:00:07"
+						}];
+
+						var http = function(yue) {
+
+							$http.get('http://gank.io/api/data/福利/30/' + yue)
+								.success(function(newItems) {
+									$scope.time = '2018年' + yue + "月";
+									$scope.items = newItems.results;
+								})
+								.finally(function() {
+
+								});
+						};
+
+						// 注册事件监听
+						function connectWebViewJavascriptBridge(callback) {
+							if(window.WebViewJavascriptBridge) {
+								callback(WebViewJavascriptBridge)
+							} else {
+								document.addEventListener(
+									'WebViewJavascriptBridgeReady',
+									function() {
+										callback(WebViewJavascriptBridge)
+									},
+									false
+								);
+							}
+						};
+
+						// 注册回调函数，第一次连接时调用 初始化函数
+						connectWebViewJavascriptBridge(function(bridge) {
+							//初始化
+							bridge.init(function(message, responseCallback) {
+								var data = {
+									'Javascript Responds': 'Hello jarry!'
+								};
+								responseCallback(data);
+							});
+
+							// 接收安卓发来的消息 并返回给安卓通知
+							bridge.registerHandler("getImg", function(data, responseCallback) {
+
+								$scope.imglist.push(data);
+
+								responseCallback("我接受到了安卓的调用");
+							});
+
+							// 接收安卓发来的消息 并返回给安卓通知
+							bridge.registerHandler("getRecord", function(data, responseCallback) {
+
+								var obj = eval('(' + data + ')');
+								$scope.recordlist.push(obj);
+							});
+						});
+						
+						
+						//播放
+						$scope.recordPlay = function(record) {
+							//JS调用注册方法 jsTojava【JS代码】
+							window.WebViewJavascriptBridge.callHandler(
+								'recordPlay',
+								record.filePath,
+								function(responseData) {
+
+								}
+							);
+						};
+					}
+				]);
+		</script>
+	</body>
+
+</html>

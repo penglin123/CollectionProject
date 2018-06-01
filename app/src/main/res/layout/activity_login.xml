@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@mipmap/login_bg"
     android:orientation="vertical">
 
@@ -104,7 +105,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/shape_solid_oval_3aa6e8_8"
+        android:background="@drawable/shape_solid_oval_7990ff_8"
         android:text="@string/login"
         android:textColor="#fff"
         android:textSize="@dimen/text_size_16" />

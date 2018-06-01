@@ -1,0 +1,115 @@
+	* {
+		margin: 0;
+		padding: 0;
+		font-family: "微软雅黑";
+		color: #666;
+	}
+	
+	.loading {
+		text-align: center;
+		width: 50px;
+		height: 50px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -25px 0 0 -25px;
+	}
+	.load_error{
+		width: 100px;
+		height: 100px;
+		margin: -50px 0 0 -50px;
+		text-align: center;
+	}
+	
+	.loading svg {
+		width: 100% !important;
+		height: 100% !important;
+	}
+	
+	#div_card {
+		margin: 0px;
+	}
+	
+	#item {
+		border-style: none;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	
+	#name {
+		color: #666;
+		margin: 10px;
+		font-size: 16px;
+	}
+	
+	#content_details {
+		overflow: hidden;
+	}
+	
+	#content_details>div {
+		float: left;
+		width: 33.33%;
+		text-align: center;
+	}
+	
+	#content_details>div>div {
+		color: #222;
+		font-size: 20px;
+	}
+	
+	#content_details p {
+		margin-top: 2px;
+		font-size: 16px;
+		
+	}
+	
+	#content_details span {
+		margin-left: 2px;
+		font-size: 14px;
+	}
+	
+	.address {
+		margin: 10px;
+	}
+	
+	.address i {
+		color: #B2B2B2;
+		margin-right: 6px;
+		font-size: 18px;
+	}
+	
+	.footer {
+		
+		line-height: 36px;
+	}
+	
+	.path_planning,
+	.write_summary {
+		float: left;
+		width: 33.33%;
+		text-align: center;
+		border-style: solid;
+		border-width: 0px;
+		border-right-width: 1px;
+		border-right-color: #ddd;
+	}
+	
+	.statement_of_account {
+		float: left;
+		width: 33.33%;
+		text-align: center;
+	}
+	
+	.footer i {
+		font-size: 20px;
+		color: #3aa6e8;
+		margin: 10px;
+	}
+	
+	hr {
+		height: 1px;
+		border: none;
+		border-top: 1px solid #ddd;
+	}

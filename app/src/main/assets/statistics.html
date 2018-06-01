@@ -1,0 +1,120 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>统计</title>
+		<link href="css/ionic.min.css" rel="stylesheet">
+		<script src="js/ionic.bundle.min.js"></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.card {
+				font-family: "微软雅黑";
+				margin: 10px;
+				height: 100px;
+				color: #666666;
+			}
+			
+			span {
+				display: inline-block;
+				width: 1%;
+				height: 100%;
+				border-radius: 10px;
+				float: left;
+			}
+			
+			.span1 {
+				background: #22c6cf;
+				border: 1px solid #22c6cf;
+			}
+			
+			.span2 {
+				background: #ffdb69;
+				border: 1px solid #ffdb69;
+			}
+			
+			.span3 {
+				background: #3889ff;
+				border: 1px solid #3889ff;
+			}
+			
+			.card div {
+				float: left;
+				text-align: center;
+				line-height: 100px;
+				width: 99%;
+			}
+			
+			.card img {
+				vertical-align: middle;
+				height: 35px;
+				width: 35px;
+				margin-right: 10px;
+			}
+		</style>
+
+		<script type="text/javascript">
+			angular.module('statistic', ['ionic'])
+				.controller('statistic', ['$scope',
+					function($scope) {
+
+						$scope.journal = function() {
+							//JS调用注册方法submitFromWeb【JS代码】
+							window.WebViewJavascriptBridge.callHandler(
+								'jsTojava', {
+									'tag': "1",
+									'data': "你是猪吗11111"
+								},
+								function(responseData) {}
+							);
+						};
+						$scope.signIn = function() {
+							//JS调用注册方法submitFromWeb【JS代码】
+							window.WebViewJavascriptBridge.callHandler(
+								'jsTojava', {
+									'tag': "2",
+									'data': "你是猪吗22222"
+								},
+								function(responseData) {}
+							);
+						};
+						$scope.repayment = function() {
+							//JS调用注册方法submitFromWeb【JS代码】
+							window.WebViewJavascriptBridge.callHandler(
+								'jsTojava', {
+									'tag': "3",
+									'data': "你是猪吗33333"
+								},
+								function(responseData) {
+
+								}
+							);
+						};
+					}
+				])
+		</script>
+	</head>
+
+	<body ng-app="statistic" ng-controller="statistic">
+
+		<div class="card" ng-click="journal()">
+			<span class="span1"></span>
+			<div>
+				<img src="img/HBuilder.png" /> 日报/月报
+			</div>
+		</div>
+		<div class="card" ng-click="signIn()">
+			<span class="span2"></span>
+			<div>
+				<img src="img/HBuilder.png" /> 个人考勤
+			</div>
+		</div>
+		<div class="card" ng-click="repayment()">
+			<span class="span3"></span>
+			<div>
+				<img src="img/HBuilder.png" /> 实时还款
+			</div>
+		</div>
+	</body>
+
+</html>

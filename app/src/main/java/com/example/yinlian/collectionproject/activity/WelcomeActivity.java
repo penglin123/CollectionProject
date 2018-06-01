@@ -11,7 +11,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.example.library.utils.SPManager;
@@ -21,7 +20,9 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
- * @author lenovo
+ * 欢迎页面
+ *
+ * @author penglin
  */
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -94,8 +95,8 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     public void getHome() {
+
         String token = SPManager.getToken();
-        LogUtils.i(token);
         if (!StringUtils.isEmpty(token)) {
 
             Intent intent = new Intent(WelcomeActivity.this, GestureLockActivity.class);
@@ -111,7 +112,6 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //  If null, all callbacks and messages will be removed.
         mHandler.removeCallbacksAndMessages(null);
     }
 

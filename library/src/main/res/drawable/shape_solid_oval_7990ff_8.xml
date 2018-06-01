@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- 实心填充 -->
-    <solid android:color="#cc3aa6e8" />
+    <solid android:color="#7990ff" />
 
     <!-- 边角的圆弧半径 -->
     <corners android:radius="8dip" />

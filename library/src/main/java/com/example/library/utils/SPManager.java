@@ -3,7 +3,7 @@ package com.example.library.utils;
 import com.blankj.utilcode.util.SPUtils;
 
 /**
- * - @Description:
+ * - @Description:对SPUtils进一步封装
  * - @Author:  penglin
  * - @Time:   2018/04/18
  */

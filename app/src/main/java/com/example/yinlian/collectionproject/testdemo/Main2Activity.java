@@ -40,7 +40,7 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void init() {
-        initTitle("11111");
+        initTitle("测试");
         // initToolbar(R.drawable.ic_back);
         final TextView text = findViewById(R.id.text);
         text.setOnClickListener(this);
@@ -89,31 +89,6 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                 startActivity(new Intent(Main2Activity.this, VoiceActivity.class));
             }
         });
-        findViewById(R.id.log_out).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
-                builder.setTitle(R.string.prompt)
-                        .setMessage("确定却出当前账号？")
-                        .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                SPManager.putToken("");
-                                startActivity(new Intent(Main2Activity.this, LoginActivity.class));
-
-                                dialog.dismiss();
-                                finish();
-                            }
-                        })
-                        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-
-            }
-        });
 
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,14 +113,14 @@ public class Main2Activity extends BaseActivity implements View.OnClickListener 
                                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    //  shouldRequest.again(true);
+
                                                     PermissionUtils.launchAppDetailsSettings();
                                                 }
                                             })
                                             .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    // shouldRequest.again(false);
+
 
                                                 }
                                             })

@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yinlian.collectionproject">
 
-    <!-- To auto-complete the email text field in the login_bg form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-
     <application
         android:name="com.example.library.base.BaseApplication"
         android:allowBackup="true"
@@ -45,10 +40,26 @@
         <activity android:name=".testdemo.GreedaoActivity" />
         <activity android:name=".testdemo.BaiduMapActivity" />
         <activity android:name=".testdemo.VoiceActivity" />
+
+
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.GestureLockActivity"></activity>
+        <activity
+            android:name=".activity.GestureLockActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.StatisticsDetailsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.CustomerDetailsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.SummaryDetailsActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".activity.WriteSummaryActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

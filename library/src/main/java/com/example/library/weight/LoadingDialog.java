@@ -1,8 +1,11 @@
 package com.example.library.weight;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.example.library.R;
@@ -44,22 +47,6 @@ public class LoadingDialog extends ProgressDialog {
 
     public void setTitle(String message) {
         mTitleTv.setText(mMessage);
-    }
-
-
-
-    /**
-     * 显示在底部
-     */
-    public void showButtom() {
-        // WindowManager windowManager = ((Activity)
-        // mContext).getWindowManager();
-        // Display display = windowManager.getDefaultDisplay();
-        //
-        // WindowManager.LayoutParams lp = getWindow().getAttributes();
-        // lp.width = (int) (display.getWidth() * 0.8);
-        // getWindow().setAttributes(lp);
-        // super.show();
     }
 
 }

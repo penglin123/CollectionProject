@@ -1,14 +1,13 @@
 package com.example.library.voiceutil;
 
-/**
- * 类名：VoiceBean.java
- * 描述：
- * 作者：xsf
- * 创建时间：2017/3/16
- * 最后修改时间：2017/3/16
- */
 
 public class VoiceBean {
+    public VoiceBean(String filePath, long length, String strLength) {
+        this.filePath = filePath;
+        this.length = length;
+        this.strLength = strLength;
+    }
+
     public String filePath;
     public long length;
     public String strLength;

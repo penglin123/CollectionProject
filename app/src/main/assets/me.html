@@ -1,0 +1,118 @@
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title>我的</title>
+		<link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.min.css" rel="stylesheet">
+		<script src="js/ionic.bundle.min.js"></script>
+
+		<script>
+			angular.module('me', ['ionic'])
+				.controller('me', function($scope) {
+
+				});
+		</script>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				font-family: "微软雅黑";
+			}
+			
+			hr {
+				height: 0px;
+				border: none;
+				border-top: 6px solid #ddd;
+			}
+			
+			.head {
+				height: 120px;
+				background: #7990ff;
+			}
+			
+			.head img {
+				width: 80px;
+				height: 80px;
+				margin-top: 7px;
+			}
+			
+			.head div {
+				border: none;
+				background: #7990ff;
+				float: left;
+				margin-top: 18.5px;
+			}
+			
+			.head h2 {
+				color: #FFFFFF;
+				font-size: 18px;
+			}
+			
+			.head p {
+				margin-top: 10px;
+				color: #FFFFFF;
+			}
+			
+			.head i {
+				float: right;
+				color: #FFFFFF;
+				font-size: 16px;
+				margin-right: 20px;
+				margin-top: 51px;
+			}
+			
+			.list span {
+				color: 666666;
+			}
+			
+			.list i {
+				color: #8a8a8a;
+			}
+		</style>
+	</head>
+
+	<body ng-app="me" ng-controller="me">
+
+		<ion-content>
+			<div class="head">
+				<div class=" item item-avatar ">
+					<img src="http://www.runoob.com/try/demo_source/mcfly.jpg ">
+					<h2>催收员张三</h2>
+					<p>有志者，事竟成</p>
+				</div>
+				<i class="icon ion-chevron-right"></i>
+			</div>
+			<hr/>
+			<div class="list ">
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-search"></i> 常用查询
+				</span>
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-chatbubble-outline"></i> 消息通知
+				</span>
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-paper-outline"></i> 知识库
+				</span>
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-calculator-outline"></i> 计算器
+				</span>
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-email-outline"></i> 意见反馈
+				</span>
+				<span class="item item-icon-left " href="# ">
+					<i class="icon ion-ios-gear-outline"></i></i> 设置
+				</span>
+				<span class="item item-icon-left " href="# ">
+				<i class="icon ion-ios-ionic-outline"></i>退出登录
+				</span>
+
+			</div>
+		</ion-content>
+
+	</body>
+
+</html>

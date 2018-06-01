@@ -22,8 +22,9 @@ public class VoiceActivity extends BaseActivity {
 
     @Override
     public void init() {
-        RecordVoiceButton mBtRec = findViewById(R.id.button_rec);
         play = findViewById(R.id.play);
+        RecordVoiceButton mBtRec = findViewById(R.id.button_rec);
+
         voiceManager = new VoiceManager(this);
 
         mBtRec.setEnrecordVoiceListener(new RecordVoiceButton.EnRecordVoiceListener() {
@@ -32,8 +33,8 @@ public class VoiceActivity extends BaseActivity {
                 // adapter.add(new VoiceBean(length, strLength, filePath) )
                 play.setVisibility(View.VISIBLE);
                 play.setText("播放时长：" + strLength);
-                voiceBean = new VoiceBean();
-                voiceBean.filePath = filePath;
+//                voiceBean = new VoiceBean();
+//                voiceBean.filePath = filePath;
             }
         });
         play.setOnClickListener(new View.OnClickListener() {

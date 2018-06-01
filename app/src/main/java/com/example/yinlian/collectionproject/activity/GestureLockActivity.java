@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -16,18 +17,26 @@ import com.example.library.base.BaseActivity;
 import com.example.library.gesturelock.GestureEventListener;
 import com.example.library.gesturelock.GestureLockViewGroup;
 import com.example.library.gesturelock.GesturePasswordSettingListener;
-import com.example.library.gesturelock.GestureUnmatchedExceedListener;
 import com.example.library.utils.SPManager;
 import com.example.library.utils.ToastUtils;
 import com.example.yinlian.collectionproject.R;
-import com.example.yinlian.collectionproject.testdemo.Main2Activity;
+import com.wei.android.lib.fingerprintidentify.FingerprintIdentify;
+import com.wei.android.lib.fingerprintidentify.base.BaseFingerprint;
 
+/**
+ * - @Description:  手势密码设置与解锁，还包含指纹解锁
+ * - @Author:  penglin
+ * - @Time:  2018/4/20
+ */
 public class GestureLockActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private TextView tvState;
     private GestureLockViewGroup mGestureLockViewGroup;
     private Switch gestureTrajectoryIsVisible;
     private TextView tvForgetGestureCode;
-    private boolean isReset = false;
+    private ImageView ivFingerprint;
+
+    //指纹解锁目前存在内存泄露，所以注释掉了
+    private FingerprintIdentify mFingerprintIdentify;
 
     @Override
     public int getLayoutId() {
@@ -48,24 +57,62 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
         mGestureLockViewGroup = findViewById(R.id.gesturelock);
         gestureTrajectoryIsVisible = findViewById(R.id.gesture_trajectory_is_visible);
         tvForgetGestureCode = findViewById(R.id.tv_forget_gesture_code);
+        ivFingerprint = findViewById(R.id.iv_fingerprint);
 
     }
 
     private void initData() {
 
-        initTitle("手势密码");
+        initTitle(getString(R.string.gesture_password));
+
+
         setGestureWhenNoSet();
+
     }
 
     private void initListener() {
-        gestureEventListener();
-        gesturePasswordSettingListener();
-        gestureRetryLimitListener();
+
+        gestureEventListener();//手势监听
+        gesturePasswordSettingListener();//手势设置监听
         gestureTrajectoryIsVisible.setOnCheckedChangeListener(this);
         tvForgetGestureCode.setOnClickListener(this);
 
     }
 
+    //指纹识别监听
+    private void initVerify() {
+
+        mFingerprintIdentify.startIdentify(5, new BaseFingerprint.FingerprintIdentifyListener() {
+            @Override
+            public void onSucceed() {
+                LogUtils.i("onSucceed");
+                tvState.setTextColor(Color.parseColor("#888888"));
+                tvState.setText(R.string.fingerprint_verification_success);
+                startActivity(new Intent(GestureLockActivity.this, MainActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onNotMatch(int availableTimes) {
+
+                tvState.setTextColor(Color.RED);
+                tvState.setText(R.string.fingerprint_verification_failed);
+                startAnimation();
+            }
+
+            @Override
+            public void onFailed(boolean isDeviceLocked) {
+                LogUtils.i("onFailed");
+
+            }
+
+            @Override
+            public void onStartFailedByDeviceLocked() {
+                LogUtils.i("onStartFailedByDeviceLocked");
+            }
+
+        });
+    }
 
     private void gestureEventListener() {
         mGestureLockViewGroup.setGestureEventListener(new GestureEventListener() {
@@ -82,10 +129,8 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
                 tvForgetGestureCode.setEnabled(true);
                 if (!matched) {
                     tvState.setTextColor(Color.RED);
-                    tvState.setText("密码错误，还可以输入" + SPManager.getRetryTimes() + "次");
-
-                    Animation shake = AnimationUtils.loadAnimation(GestureLockActivity.this, R.anim.shake);//加载动画资源文件
-                    tvState.startAnimation(shake); //给组件播放动画效果
+                    tvState.setText(String.format(getString(R.string.number_of_password_errors), SPManager.getRetryTimes()));
+                    startAnimation();
 
                     mGestureLockViewGroup.resetView();
 
@@ -97,13 +142,12 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
                         AlertDialog.Builder builder = new AlertDialog.Builder(GestureLockActivity.this);
                         builder.setCancelable(false)
                                 .setTitle(R.string.prompt)
-                                .setMessage("您已连续五次输错手势，手势解锁关闭，请重新登录")
+                                .setMessage(R.string.gesture_unlock_close)
                                 .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
                                         startActivity(new Intent(GestureLockActivity.this, LoginActivity.class));
-
                                         dialog.dismiss();
                                         finish();
                                     }
@@ -112,17 +156,11 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
                     }
 
                 } else {
-                    if (isReset) {
-                        isReset = false;
-                        ToastUtils.showShort("清除成功!");
-                        resetGesturePattern();
-                    } else {
-                        tvState.setTextColor(Color.WHITE);
-                        tvState.setText("手势密码正确");
-                        SPManager.putRetryTimes(5);
-                        startActivity(new Intent(GestureLockActivity.this, Main2Activity.class));
-                        finish();
-                    }
+                    tvState.setTextColor(Color.parseColor("#888888"));
+                    tvState.setText(R.string.correct_gesture_password);
+                    SPManager.putRetryTimes(5);
+                    startActivity(new Intent(GestureLockActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         });
@@ -135,13 +173,12 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
                 LogUtils.d("onFirstInputComplete");
                 if (len > 3) {
                     tvState.setTextColor(Color.parseColor("#888888"));
-                    tvState.setText("再次绘制手势密码");
+                    tvState.setText(R.string.again_draw_the_password);
                     return true;
                 } else {
                     tvState.setTextColor(Color.RED);
-                    tvState.setText("最少连接4个点，请重新输入!");
-                    Animation shake = AnimationUtils.loadAnimation(GestureLockActivity.this, R.anim.shake);//加载动画资源文件
-                    tvState.startAnimation(shake); //给组件播放动画效果
+                    tvState.setText(R.string.least_connect_4_points);
+                    startAnimation();
                     return false;
                 }
             }
@@ -149,8 +186,8 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
             @Override
             public void onSuccess() {
                 LogUtils.d("onSuccess");
-                ToastUtils.showShort("手势密码设置成功");
-                Intent intent = new Intent(GestureLockActivity.this, Main2Activity.class);
+                ToastUtils.showShort(R.string.gestures_password_successfully_set);
+                Intent intent = new Intent(GestureLockActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -159,34 +196,39 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
             public void onFail() {
                 LogUtils.d("onFail");
                 tvState.setTextColor(Color.RED);
-                tvState.setText("与上一次绘制不一致，请重新绘制");
-                Animation shake = AnimationUtils.loadAnimation(GestureLockActivity.this, R.anim.shake);//加载动画资源文件
-                tvState.startAnimation(shake); //给组件播放动画效果
+                tvState.setText(R.string.repaint);
+                startAnimation();
             }
         });
     }
 
-    private void gestureRetryLimitListener() {
-        mGestureLockViewGroup.setGestureUnmatchedExceedListener(new GestureUnmatchedExceedListener() {
-            @Override
-            public void onUnmatchedExceedBoundary() {
-                tvState.setTextColor(Color.RED);
-                tvState.setText("错误次数过多，请稍后再试!");
-            }
-        });
-    }
-
-
+    //判断是否设置过手势密码
     private void setGestureWhenNoSet() {
+
         if (!mGestureLockViewGroup.isSetPassword()) {
-            LogUtils.d("未设置密码，开始设置密码");
-            tvState.setText("绘制手势密码");
+            tvState.setText(R.string.draw_the_password);
             tvForgetGestureCode.setVisibility(View.INVISIBLE);
             gestureTrajectoryIsVisible.setVisibility(View.INVISIBLE);
+            ivFingerprint.setVisibility(View.GONE);
 
         } else {
+            //开启指纹识别
+            //  mFingerprintIdentify = new FingerprintIdentify(this);
+            //判断指纹识别是否可用
+//            if (mFingerprintIdentify.isFingerprintEnable()) {
+//
+//                tvState.setText(R.string.please_use_fingerprint_or_manual_password_unlock);
+//                ivFingerprint.setVisibility(View.VISIBLE);
+//
+//                initVerify(); //初始化指纹识别监听
+//            } else {
+            tvState.setText(R.string.please_use_manual_password_unlock);
+//                ivFingerprint.setVisibility(View.GONE);
+//                mFingerprintIdentify.cancelIdentify();
+//            }
+
             if (SPManager.getGestureIsVisible()) {
-                mGestureLockViewGroup.setPaintColorAndAlpha(0Xff3aa6e8, 50);
+                mGestureLockViewGroup.setPaintColorAndAlpha(0Xff7990ff, 50);
                 gestureTrajectoryIsVisible.setChecked(true);
             } else {
                 mGestureLockViewGroup.setPaintColorAndAlpha(0X00ffffff, 0);
@@ -196,17 +238,12 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
         }
     }
 
-    private void resetGesturePattern() {
-        mGestureLockViewGroup.removePassword();
-        setGestureWhenNoSet();
-        mGestureLockViewGroup.resetView();
-    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        LogUtils.i("isChecked===" + isChecked);
+
         if (isChecked) {
-            mGestureLockViewGroup.setPaintColorAndAlpha(0Xff3aa6e8, 50);
+            mGestureLockViewGroup.setPaintColorAndAlpha(0Xff7990ff, 50);
             SPManager.putGestureIsVisible(true);
         } else {
             mGestureLockViewGroup.setPaintColorAndAlpha(0X00ffffff, 0);
@@ -219,7 +256,7 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
 
         AlertDialog.Builder builder = new AlertDialog.Builder(GestureLockActivity.this);
         builder.setTitle(R.string.prompt)
-                .setMessage("忘记手势密码，需重新登录")
+                .setMessage(R.string.forget_gesture_code)
                 .setPositiveButton(R.string.login_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -238,5 +275,18 @@ public class GestureLockActivity extends BaseActivity implements CompoundButton.
                     }
                 })
                 .show();
+    }
+
+    private void startAnimation() {
+        //加载动画资源文件
+        Animation shake = AnimationUtils.loadAnimation(GestureLockActivity.this, R.anim.shake);
+        //给组件播放动画效果
+        tvState.startAnimation(shake);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        mFingerprintIdentify = null;
     }
 }

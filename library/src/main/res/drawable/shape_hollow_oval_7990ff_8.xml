@@ -4,9 +4,9 @@
     <!-- 实心填充 -->
 
     <!-- 边角的圆弧半径 -->
-    <corners android:radius="8dip" />
+    <corners android:radius="8dp" />
     <!-- 实心填充 -->
     <stroke
         android:width="1dp"
-        android:color="#3aa6e8" />
+        android:color="#7990ff" />
 </shape>

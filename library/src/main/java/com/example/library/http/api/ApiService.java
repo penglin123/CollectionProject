@@ -1,7 +1,6 @@
 package com.example.library.http.api;
 
 
-import com.example.library.http.bean.BaseResponse;
 import com.example.library.http.bean.BooksByCatsResponse;
 import com.example.library.http.bean.LoginRequest;
 import com.example.library.http.bean.LoginResponse;
@@ -30,10 +29,11 @@ public interface ApiService {
                                                    @Query("start") int start,
                                                    @Query("limit") int limit);
 
-
-    @POST("/book/by-categories")
-    Observable<BaseResponse<BooksByCatsResponse>> post(@Body BooksByCatsResponse booksByCatsBean1);
-
+    /**
+     * 模拟一下，要改的
+     * @param loginRequest
+     * @return
+     */
     @POST("/book/by-categories")
     Observable<LoginResponse> login(@Body LoginRequest loginRequest);
 
